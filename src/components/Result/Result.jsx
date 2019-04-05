@@ -12,7 +12,7 @@ class Result extends React.Component {
         const { distance, from, to, date, numOfPassengers } = this.props.search;
         return (
             <div>
-                { distance && <p>Distance: {distance}</p> }
+                { distance && <p>Distance: {parseFloat(distance)/1000.0} km</p> }
                 { from && <p>from: {from}</p> }
                 { to && <p>to: {to}</p> }
                 { date && <p>date: {date}</p> }
