@@ -17,6 +17,7 @@ class Home extends React.Component {
         const { view } = this.props.root;
         return (
             <div>
+                <div className="info">Plan your travels</div>
                 {
                     view && view === 'search' && <Search />
                 }

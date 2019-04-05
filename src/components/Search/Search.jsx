@@ -75,7 +75,7 @@ class Search extends React.Component {
             <div>
                 <form>
                     <ul>
-                    <PlacesAutocomplete
+                    <li><PlacesAutocomplete
                         value={this.state.start}
                         onChange={this.handleChange.bind(this, 'start')}
                         onSelect={this.handleStartSelect.bind(this)}
@@ -114,6 +114,8 @@ class Search extends React.Component {
                         </div>
                         )}
                     </PlacesAutocomplete>
+                    </li>
+                    <li>
                     <PlacesAutocomplete
                         value={this.state.end}
                         onChange={this.handleChange.bind(this, 'end')}
@@ -152,11 +154,12 @@ class Search extends React.Component {
                             </div>
                         </div>
                         )}
-                    </PlacesAutocomplete>
+                    </PlacesAutocomplete></li>
                         <li><input onChange={this.handleGenericChange.bind(this, 'passengers')} type="number" placeholder="Number of passengers"/></li>
                         <li><input onChange={this.handleGenericChange.bind(this, 'date')} type="date"/></li>
+                        <li><button onClick={this.handleSubmit.bind(this)} type="submit">Get Distance</button></li>
                     </ul>
-                    <button onClick={this.handleSubmit.bind(this)} type="submit">Get Distance</button>
+                    
                 </form>
             </div>
         );

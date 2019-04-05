@@ -5,6 +5,8 @@ import { history } from './_helpers';
 
 import Home from './components/Home/Home';
 
+import './App.css';
+
 const App = props => (
     <div>
         <Router history={history}>
