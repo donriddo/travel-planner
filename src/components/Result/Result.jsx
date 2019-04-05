@@ -9,10 +9,14 @@ class Result extends React.Component {
     }
 
     render() {
-        const { distance } = this.props.search;
+        const { distance, from, to, date, numOfPassengers } = this.props.search;
         return (
             <div>
                 { distance && <p>Distance: {distance}</p> }
+                { from && <p>from: {from}</p> }
+                { to && <p>to: {to}</p> }
+                { date && <p>date: {date}</p> }
+                { numOfPassengers && <p>numOfPassengers: {numOfPassengers}</p> }
             </div>
         );
     }
