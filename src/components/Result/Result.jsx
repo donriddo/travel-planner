@@ -4,10 +4,6 @@ import { connect } from 'react-redux';
 
 class Result extends React.Component {
 
-    componentDidMount() {
-
-    }
-
     render() {
         const { distance, from, to, date, numOfPassengers } = this.props.search;
         return (

@@ -22,6 +22,10 @@ class Search extends React.Component {
         console.log({ [field]: value });
         this.setState({ [field]: value });
       };
+
+      handleGenericChange(field, evt) {
+        this.setState({ [field]: evt.target.value });
+      }
      
       handleStartSelect(address) {
         geocodeByAddress(address)
@@ -149,8 +153,8 @@ class Search extends React.Component {
                         </div>
                         )}
                     </PlacesAutocomplete>
-                        <li><input onChange={this.handleChange.bind(this, 'passengers')} type="number" placeholder="Number of passengers"/></li>
-                        <li><input onChange={this.handleChange.bind(this, 'date')} type="date"/></li>
+                        <li><input onChange={this.handleGenericChange.bind(this, 'passengers')} type="number" placeholder="Number of passengers"/></li>
+                        <li><input onChange={this.handleGenericChange.bind(this, 'date')} type="date"/></li>
                     </ul>
                     <button onClick={this.handleSubmit.bind(this)} type="submit">Get Distance</button>
                 </form>
