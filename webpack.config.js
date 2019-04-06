@@ -4,7 +4,7 @@ module.exports = {
     mode: 'development',
     resolve: {
         extensions: ['.js', '.jsx', '.css'],
-        modulesDirectories: [
+        modules: [
             'node_modules'
         ]
     },
