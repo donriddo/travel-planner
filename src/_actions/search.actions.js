@@ -9,7 +9,6 @@ export const searchActions = {
 };
 
 function getDistance(data) {
-    console.log('Got data: ', data);
     return dispatch => {
         dispatch(request(data));
         // dispatch(rootActions.showLoader());

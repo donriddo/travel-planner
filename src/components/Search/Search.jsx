@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import qs from 'query-string';
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
+import { geocodeByAddress } from 'react-places-autocomplete';
 
 import { searchActions } from '../../_actions';
+
+import Autocomplete from '../general/Autocomplete';
 
 class Search extends React.Component {
     constructor(props) {
@@ -75,86 +77,24 @@ class Search extends React.Component {
             <div>
                 <form>
                     <ul>
-                    <li><PlacesAutocomplete
-                        value={this.state.start}
-                        onChange={this.handleChange.bind(this, 'start')}
-                        onSelect={this.handleStartSelect.bind(this)}
-                        searchOptions={searchOptions}
-                    >
-                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                        <div>
-                            <input
-                            {...getInputProps({
-                                placeholder: 'Enter your address',
-                                className: 'location-search-input',
-                            })}
+                        <li>
+                            <Autocomplete
+                                value={this.state.start}
+                                onChange={this.handleChange.bind(this, 'start')}
+                                onSelect={this.handleStartSelect.bind(this)}
+                                searchOptions={searchOptions}
+                                placeholder="Enter your address"
                             />
-                            <div className="autocomplete-dropdown-container">
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map(suggestion => {
-                                const className = suggestion.active
-                                ? 'suggestion-item--active'
-                                : 'suggestion-item';
-                                // inline style for demonstration purpose
-                                const style = suggestion.active
-                                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                return (
-                                <div
-                                    {...getSuggestionItemProps(suggestion, {
-                                    className,
-                                    style,
-                                    })}
-                                >
-                                    <span>{suggestion.description}</span>
-                                </div>
-                                );
-                            })}
-                            </div>
-                        </div>
-                        )}
-                    </PlacesAutocomplete>
-                    </li>
-                    <li>
-                    <PlacesAutocomplete
-                        value={this.state.end}
-                        onChange={this.handleChange.bind(this, 'end')}
-                        onSelect={this.handleEndSelect.bind(this)}
-                        searchOptions={searchOptions}
-                    >
-                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                        <div>
-                            <input
-                            {...getInputProps({
-                                placeholder: 'Enter your destination address',
-                                className: 'location-search-input',
-                            })}
+                        </li>
+                        <li>
+                            <Autocomplete
+                                value={this.state.end}
+                                onChange={this.handleChange.bind(this, 'end')}
+                                onSelect={this.handleEndSelect.bind(this)}
+                                searchOptions={searchOptions}
+                                placeholder="Enter destination address"
                             />
-                            <div className="autocomplete-dropdown-container">
-                            {loading && <div>Loading...</div>}
-                            {suggestions.map(suggestion => {
-                                const className = suggestion.active
-                                ? 'suggestion-item--active'
-                                : 'suggestion-item';
-                                // inline style for demonstration purpose
-                                const style = suggestion.active
-                                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                return (
-                                <div
-                                    {...getSuggestionItemProps(suggestion, {
-                                    className,
-                                    style,
-                                    })}
-                                >
-                                    <span>{suggestion.description}</span>
-                                </div>
-                                );
-                            })}
-                            </div>
-                        </div>
-                        )}
-                    </PlacesAutocomplete></li>
+                        </li>
                         <li><input onChange={this.handleGenericChange.bind(this, 'passengers')} type="number" placeholder="Number of passengers"/></li>
                         <li><input onChange={this.handleGenericChange.bind(this, 'date')} type="date"/></li>
                         <li><button onClick={this.handleSubmit.bind(this)} type="submit">Get Distance</button></li>
