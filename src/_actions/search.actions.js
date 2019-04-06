@@ -2,6 +2,7 @@ import geolib from 'geolib';
 
 import { searchConstants } from '../_constants';
 import { rootActions } from '../_actions';
+import { history } from '../_helpers';
 
 export const searchActions = {
     getDistance
@@ -19,7 +20,7 @@ function getDistance(data) {
         );
 
         dispatch(success(distance));
-        dispatch(rootActions.showResult());
+        history.push('/result');
     };
 
     function request(search) { return { type: searchConstants.GET_DISTANCE_REQUEST, search } }

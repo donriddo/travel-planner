@@ -1,16 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Search from '../Search/Search';
 import Result from '../Result/Result';
 
 import { rootActions } from '../../_actions';
+import { history } from '../../_helpers';
 
 class Home extends React.Component {
 
     componentDidMount() {
-        this.props.dispatch(rootActions.showSearch())
+        history.push('/search');
     }
 
     render() {
@@ -18,12 +19,8 @@ class Home extends React.Component {
         return (
             <div>
                 <div className="info">Plan your travels</div>
-                {
-                    view && view === 'search' && <Search />
-                }
-                {
-                    view && view === 'result' && <Result />
-                }
+                <Route path="/search" component={Search} />
+                <Route path="/result" component={Result} />
             </div>
         );
     }

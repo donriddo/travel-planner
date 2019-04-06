@@ -23,7 +23,7 @@ body {
     background-color: #cfdae9;
     border-radius: 15px;
     padding: 10px;
-    font-size: 44px;
+    font-size: 14px;
   }
 
   button {
@@ -40,5 +40,9 @@ body {
     font-size: 33px;
     padding-bottom: 20px;
     color: rgb(58, 130, 212);
+  }
+
+  .result {
+      text-align: center
   }
   
