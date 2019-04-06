@@ -11,15 +11,12 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            start: '', startLat: '', startLng: '',
-            end: '', endLat: '', endLng: '',
-            date: null, passengers: 0
+            date: null, passengers: 0,
         };
       }
      
       handleChange(field, value) {
-        console.log({ [field]: value });
-        this.setState({ [field]: value });
+        this.props.dispatch(searchActions.updateField({ [field]: value }));
       };
 
       handleGenericChange(field, evt) {
@@ -27,59 +24,38 @@ class Search extends React.Component {
       }
      
       handleStartSelect(address) {
-        geocodeByAddress(address)
-          .then((results) => {
-              console.log(results)
-              const lat = results[0].geometry.location.lat();
-              const lng = results[0].geometry.location.lng();
-              this.setState({
-                  start: results[0].formatted_address,
-                  startLat: lat,
-                  startLng: lng
-                });
-              
-            })
-          .catch(error => console.error('Error', error));
+        this.props.dispatch(searchActions.geocodeStartAddress(address));
       };
 
       handleEndSelect(address) {
-        geocodeByAddress(address)
-          .then((results) => {
-              const lat = results[0].geometry.location.lat();
-              const lng = results[0].geometry.location.lng();
-              this.setState({
-                  end: results[0].formatted_address,
-                  endLat: lat,
-                  endLng: lng
-                });
-              
-            })
-          .catch(error => console.error('Error', error));
+        this.props.dispatch(searchActions.geocodeEndAddress(address));
       };
 
       handleSubmit(evt) {
         evt.preventDefault();
-        this.props.dispatch(searchActions.getDistance(this.state));
+        const data = this.props.search;
+        data.passengers = this.state.passengers;
+        data.date = this.state.date;
+        this.props.dispatch(searchActions.getDistance(data));
       }
 
     componentDidMount() {
         const { location: { search } } = this.props;
-        const values = qs.parse(search);
-        this.setState(values);
-        if (values.start) this.handleStartSelect(values.start);
-        if (values.end) this.handleEndSelect(values.end);
+        const queries = qs.parse(search);
+        if (queries.start) this.handleStartSelect(queries.start);
+        if (queries.end) this.handleEndSelect(queries.end);
     }
 
     render() {
         const searchOptions = { types: ['geocode'] };
-        
+        const { start, end } = this.props.search;
         return (
             <div>
                 <form>
                     <ul>
                         <li>
                             <Autocomplete
-                                value={this.state.start}
+                                value={start || ''}
                                 onChange={this.handleChange.bind(this, 'start')}
                                 onSelect={this.handleStartSelect.bind(this)}
                                 searchOptions={searchOptions}
@@ -88,7 +64,7 @@ class Search extends React.Component {
                         </li>
                         <li>
                             <Autocomplete
-                                value={this.state.end}
+                                value={end || ''}
                                 onChange={this.handleChange.bind(this, 'end')}
                                 onSelect={this.handleEndSelect.bind(this)}
                                 searchOptions={searchOptions}
@@ -107,8 +83,9 @@ class Search extends React.Component {
 }
 
 function mapStateToProps(state) {
-    // const {  } = state;
+    const { search } = state;
     return {
+        search
     };
 }
 

@@ -24,6 +24,52 @@ export function search(state = {}, action) {
         error: action.error,
         loading: false
       };
+    case searchConstants.GEOCODE_START_REQUEST:
+      return {
+        ...state,
+        requestStartAddress: action.address,
+        loading: true
+      };
+    case searchConstants.GEOCODE_START_SUCCESS:
+      return {
+        ...state,
+        start: action.data.start,
+        startLat: action.data.startLat,
+        startLng: action.data.startLng,
+        loading: false
+      };
+    case searchConstants.GEOCODE_START_FAILURE:
+      return { 
+        ...state,
+        error: action.error,
+        loading: false
+      };
+    case searchConstants.GEOCODE_END_REQUEST:
+      return {
+        ...state,
+        requestEndAddress: action.address,
+        loading: true
+      };
+    case searchConstants.GEOCODE_END_SUCCESS:
+      return {
+        ...state,
+        end: action.data.end,
+        endLat: action.data.endLat,
+        endLng: action.data.endLng,
+        loading: false
+      };
+    case searchConstants.GEOCODE_END_FAILURE:
+      return { 
+        ...state,
+        error: action.error,
+        loading: false
+      };
+    case searchConstants.UPDATE_FIELD:
+      return { 
+        ...state,
+        ...action.data,
+        loading: false
+      };
     default:
       return state
   }
