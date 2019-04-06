@@ -8,19 +8,13 @@ import { searchActions } from '../../_actions';
 import Autocomplete from '../general/Autocomplete';
 
 class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: null, passengers: 0,
-        };
-      }
      
       handleChange(field, value) {
         this.props.dispatch(searchActions.updateField({ [field]: value }));
       };
 
       handleGenericChange(field, evt) {
-        this.setState({ [field]: evt.target.value });
+        this.props.dispatch(searchActions.updateField({ [field]: evt.target.value }));
       }
      
       handleStartSelect(address) {
@@ -33,10 +27,7 @@ class Search extends React.Component {
 
       handleSubmit(evt) {
         evt.preventDefault();
-        const data = this.props.search;
-        data.passengers = this.state.passengers;
-        data.date = this.state.date;
-        this.props.dispatch(searchActions.getDistance(data));
+        this.props.dispatch(searchActions.getDistance(this.props.search));
       }
 
     componentDidMount() {
@@ -44,11 +35,13 @@ class Search extends React.Component {
         const queries = qs.parse(search);
         if (queries.start) this.handleStartSelect(queries.start);
         if (queries.end) this.handleEndSelect(queries.end);
+        if (queries.passengers) this.handleGenericChange('passengers', { target: { value: queries.passengers } });
+        if (queries.date) this.handleGenericChange('date', { target: { value: queries.date } });
     }
 
     render() {
         const searchOptions = { types: ['geocode'] };
-        const { start, end } = this.props.search;
+        const { start, end, passengers, date } = this.props.search;
         return (
             <div>
                 <form>
@@ -71,8 +64,8 @@ class Search extends React.Component {
                                 placeholder="Enter destination address"
                             />
                         </li>
-                        <li><input onChange={this.handleGenericChange.bind(this, 'passengers')} type="number" placeholder="Number of passengers"/></li>
-                        <li><input onChange={this.handleGenericChange.bind(this, 'date')} type="date"/></li>
+                        <li><input value={passengers} onChange={this.handleGenericChange.bind(this, 'passengers')} type="number" placeholder="Number of passengers"/></li>
+                        <li><input value={date} onChange={this.handleGenericChange.bind(this, 'date')} type="date"/></li>
                         <li><button onClick={this.handleSubmit.bind(this)} type="submit">Get Distance</button></li>
                     </ul>
                     
