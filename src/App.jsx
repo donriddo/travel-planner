@@ -3,7 +3,8 @@ import { Router, Route } from 'react-router-dom';
 
 import { history } from './_helpers';
 
-import Home from './components/Home/Home';
+import Search from './components/Search/Search';
+import Result from './components/Result/Result';
 
 import './App.css';
 
@@ -11,7 +12,9 @@ const App = props => (
     <div>
         <Router history={history}>
             <div>
-                <Route path="/" component={Home} />
+                <div className="info">Plan your travels</div>
+                <Route exact path="/" component={Search} />
+                <Route path="/result" component={Result} />
             </div>
         </Router>
     </div>

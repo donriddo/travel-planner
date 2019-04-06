@@ -1,10 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PlacesAutocomplete, {
-    geocodeByAddress,
-    getLatLng,
-} from 'react-places-autocomplete';
+import qs from 'query-string';
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete';
 
 import { searchActions } from '../../_actions';
 
@@ -46,7 +43,6 @@ class Search extends React.Component {
       handleEndSelect(address) {
         geocodeByAddress(address)
           .then((results) => {
-              console.log(results)
               const lat = results[0].geometry.location.lat();
               const lng = results[0].geometry.location.lng();
               this.setState({
@@ -65,12 +61,16 @@ class Search extends React.Component {
       }
 
     componentDidMount() {
-
+        const { location: { search } } = this.props;
+        const values = qs.parse(search);
+        this.setState(values);
+        if (values.start) this.handleStartSelect(values.start);
+        if (values.end) this.handleEndSelect(values.end);
     }
 
     render() {
         const searchOptions = { types: ['geocode'] };
-
+        
         return (
             <div>
                 <form>
