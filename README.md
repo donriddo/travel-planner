@@ -2,7 +2,8 @@
 
 - Steps to run application
 1. Run `yarn install` to install all dependencies  
-2. Run `yarn start` to launch the app  
+2. Run `yarn test` to run the tests   
+3. Run `yarn start` to launch the app which should open up http://localhost:8080 on your browser  
 
 - To test deeplinking, you can search on the fly by passing parameters through the query
 `http://localhost:8080/?start=Lagos&end=Portugal&passengers=8&date=2019-09-08`  
