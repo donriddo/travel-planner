@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Result test 1`] = `
+<div
+  className="result"
+>
+  <p>
+    Distance: 
+    0
+     km
+  </p>
+  
+  
+  
+  <p>
+    Number of Passengers: 
+    0
+  </p>
+</div>
+`;

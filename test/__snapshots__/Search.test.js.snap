@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search test 1`] = `
+<div>
+  <form>
+    <ul>
+      <li>
+        <div>
+          <input
+            aria-autocomplete="list"
+            aria-expanded={false}
+            autoComplete="off"
+            className="location-search-input"
+            disabled={false}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Enter your address"
+            role="combobox"
+            type="text"
+            value=""
+          />
+          <div
+            className="autocomplete-dropdown-container"
+          />
+        </div>
+      </li>
+      <li>
+        <div>
+          <input
+            aria-autocomplete="list"
+            aria-expanded={false}
+            autoComplete="off"
+            className="location-search-input"
+            disabled={false}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Enter destination address"
+            role="combobox"
+            type="text"
+            value=""
+          />
+          <div
+            className="autocomplete-dropdown-container"
+          />
+        </div>
+      </li>
+      <li>
+        <input
+          onChange={[Function]}
+          placeholder="Number of passengers"
+          type="number"
+          value=""
+        />
+      </li>
+      <li>
+        <input
+          onChange={[Function]}
+          type="date"
+          value=""
+        />
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+          type="submit"
+        >
+          Get Distance
+        </button>
+      </li>
+    </ul>
+  </form>
+</div>
+`;
